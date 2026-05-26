@@ -7,7 +7,7 @@ import { PlatformProvider } from '@/contexts/PlatformContext';
 import { useLicenseCheck } from "./hooks/useLicenseCheck";
 
 export default function App() {
-  const { status, msg } = useLicenseCheck();
+  const { status } = useLicenseCheck();
   if (status === "checking") return null;
   if (status === "blocked") return null;
 

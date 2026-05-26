@@ -35,6 +35,7 @@ export default function RegisterPage() {
     const [searchParams] = useSearchParams();
     const conviteCode = searchParams.get('convite');
     const isTrial = searchParams.get('trial') === 'true';
+    const refCode = searchParams.get('ref');
     const [step, setStep] = useState(1);
     const [errorMsg, setErrorMsg] = useState('');
     const [loadingCep, setLoadingCep] = useState(false);

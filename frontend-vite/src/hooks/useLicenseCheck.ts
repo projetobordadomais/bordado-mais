@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-const LICENSE_URL =
-  "https://gist.githubusercontent.com/caironf3nexorai/20aa31d03760d9368265c5eca8d98c74/raw/control.json";
+const LICENSE_URL = import.meta.env.VITE_LICENSE_URL;
 
 type LicenseStatus = "checking" | "active" | "blocked";
 
@@ -23,7 +22,6 @@ export function useLicenseCheck() {
         setStatus("blocked");
       }
     };
-
     check();
   }, []);
 
