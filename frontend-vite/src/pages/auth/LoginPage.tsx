@@ -117,7 +117,7 @@ export default function LoginPage() {
                                 if (!error) {
                                     toast({ title: 'Sucesso!', description: 'Email de recuperação enviado! Verifique sua caixa de entrada.' });
                                 } else {
-                                    toast({ title: 'Erro', description: 'Erro ao enviar email. Tente novamente.', variant: 'destructive' });
+                                    toast({ title: 'Erro', description: error.message || 'Erro ao enviar email. Tente novamente.', variant: 'destructive' });
                                 }
                             }} 
                             className="text-xs font-semibold text-primary hover:text-primary-dark transition-colors"
