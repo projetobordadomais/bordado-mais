@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: #F2E9DB;
+    --color-surface-warm: #FEF8EF;
+    --color-surface: #FBF5EE;
+    --color-primary: #C9A882;
+    --color-primary-hover: #b89874;
+    --color-secondary: #CCB090;
+    --color-secondary-hover: #b89874;
+    --color-accent: #5C3520;
+    --color-text-primary: #2E1A0E;
+    --color-text-secondary: #7A6050;
+    --color-text-muted: #8C6A4F;
+    --color-border: #DDD0BC;
+    --color-border-light: #D4BFA6;
+    
+    --color-success: #2D7A4F;
+    --color-error: #C0392B;
+    --color-warning: #C29A51;
+
+    --font-display: 'Fraunces', serif;
+    --font-ui: 'Inter', sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+
+    --shadow-sm: 0 2px 8px rgba(46, 26, 14, 0.05);
+    --shadow-md: 0 4px 20px rgba(46, 26, 14, 0.08);
+    --shadow-lg: 0 8px 40px rgba(46, 26, 14, 0.12);
+
+    /* Variaveis HSL base fallback/shadcn */
+    --background: 37 41% 90%; /* #F2E9DB */
+    --foreground: 23 54% 12%; /* #2E1A0E */
+    --card: 32 54% 96%; /* #FBF5EE */
+    --card-foreground: 23 54% 12%; 
+    --popover: 32 54% 96%;
+    --popover-foreground: 23 54% 12%;
+    --primary: 32 42% 65%; /* #C9A882 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 32 41% 68%; /* #CCB090 */
+    --secondary-foreground: 23 54% 12%;
+    --muted: 35 44% 88%; /* #EFE3D2 */
+    --muted-foreground: 26 27% 41%; /* #8C6A4F */
+    --accent: 21 48% 24%; /* #5C3520 */
+    --accent-foreground: 32 54% 96%;
+    --destructive: 4 64% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 36 33% 80%; /* #DDD0BC */
+    --input: 36 33% 80%;
+    --ring: 32 42% 65%;
+
+    --radius: var(--radius-md);
+  }
+
+  .dark {
+    /* Desativando Dark Mode (Fixado em Light por design da plataforma de bordado) */
+    --background: 41 40% 96%;
+    --foreground: 0 17% 20%;
+    --card: 30 67% 96%;
+    --card-foreground: 0 17% 20%;
+    --popover: 30 67% 96%;
+    --popover-foreground: 0 17% 20%;
+    --primary: 353 39% 63%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 85 24% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 21 44% 96%;
+    --muted-foreground: 0 17% 62%;
+    --accent: 85 24% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 17 68% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 24 37% 89%;
+    --input: 24 37% 89%;
+    --ring: 353 39% 63%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-ui selection:bg-primary-light selection:text-foreground;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-blur-up,
+  .animate-float,
+  .animate-marquee {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: none !important;
+  }
+
+  [data-section],
+  [data-section].section-visible,
+  [data-section].section-exit {
+    transition: opacity 0.3s ease;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* ------------------------------------- */
+/* --- LIFECYCLE SCROLL REVEAL (LENIS) -- */
+/* ------------------------------------- */
+
+[data-section] {
+  /* JS aplica direto os valores calculados para ser fluido */
+  will-change: opacity, transform, filter;
+  backface-visibility: hidden;
+  /* evita flickering no resize */
+  -webkit-backface-visibility: hidden;
+}
+
+/* O hero começa visível sem efeito restritivo */
+[data-section="hero"] {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* ========================================= */
+/* === GLOBAL MOBILE RESPONSIVENESS FIXES === */
+/* ========================================= */
+
+/* Prevent any horizontal scroll on the entire app */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Dialog/Modal: full-width on mobile with proper padding */
+@media (max-width: 639px) {
+  .app-dialog-content {
+    max-width: calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+  }
+
+  /* DialogFooter stacking on mobile */
+  .app-dialog-content footer,
+  .app-dialog-content [class*="DialogFooter"] {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .app-dialog-content footer button,
+  .app-dialog-content [class*="DialogFooter"] button {
+    width: 100% !important;
+  }
+
+  /* Admin sections: reduce padding on mobile */
+  .admin-section {
+    padding: 20px !important;
+  }
+}
+
+/* No-scrollbar utility */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scroll container for horizontal tabs */
+.scroll-x-tabs {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-x-tabs::-webkit-scrollbar {
+  display: none;
+}
